@@ -41,7 +41,7 @@ function App() {
     formData.append("dpi", dpi);
 
     try {
-      const response = await axios.post("http://localhost:5000/upload", formData, {
+      const response = await axios.post("https://dpi-app.onrender.com/upload", formData, {
         responseType: 'blob',
       });
 

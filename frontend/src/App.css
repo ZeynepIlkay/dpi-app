@@ -1,3 +1,4 @@
+/* Genel yapı */
 body, html {
   margin: 0;
   padding: 0;
@@ -7,6 +8,7 @@ body, html {
   justify-content: center;
   align-items: center;
   background-color: #f0f0f0;
+  overflow: hidden; /* Sayfanın dışına taşmayı engeller */
 }
 
 .app-container {
@@ -14,6 +16,7 @@ body, html {
   justify-content: center;
   align-items: center;
   height: 100vh;
+  padding: 10px;
 }
 
 .card {
@@ -23,7 +26,11 @@ body, html {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
   width: 400px;
+  max-width: 100%; /* Kartın ekran boyutuna göre esnemesini sağlar */
+  box-sizing: border-box;
   border: 2px solid #d7ef89; /* Kenar rengi */
+  max-height: 90vh; /* Kartın ekran boyutuna göre yüksekliğini sınırla */
+  overflow-y: auto; /* İçeriğin kaydırılmasına izin ver */
 }
 
 h2 {
@@ -56,7 +63,7 @@ label {
   display: block;
   margin-top: 2%;
   margin-bottom: 10px;
-  color: #0056b3; /* Label rengi */
+  color: #0056b3;
 }
 
 input[type="number"] {
@@ -66,6 +73,7 @@ input[type="number"] {
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 16px;
+  box-sizing: border-box;
 }
 
 .apply-btn {
@@ -77,8 +85,32 @@ input[type="number"] {
   cursor: pointer;
   font-size: 16px;
   transition: background-color 0.3s;
+  width: 100%; /* Mobilde tam genişlik */
+  box-sizing: border-box;
 }
 
 .apply-btn:hover {
   background-color: #0056b3;
+}
+
+/* Mobil cihazlar için medya sorgusu */
+@media (max-width: 600px) {
+  .card {
+    width: 100%; /* Kart genişliği mobilde tam ekran olur */
+    padding: 15px;
+    max-height: 80vh; /* Mobilde daha düşük bir yükseklik */
+    overflow-y: auto; /* İçeriği kaydırılabilir yap */
+  }
+
+  .drop-area {
+    padding: 15px; /* Mobilde drop-area biraz küçültülebilir */
+  }
+
+  input[type="number"] {
+    font-size: 14px; /* Daha küçük ekranlar için yazı boyutu biraz küçültülebilir */
+  }
+
+  .apply-btn {
+    padding: 10px 0; /* Düğme boyutunu biraz küçültelim */
+  }
 }

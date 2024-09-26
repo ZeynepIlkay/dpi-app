@@ -33,6 +33,13 @@ body, html {
   overflow-y: auto; /* İçeriğin kaydırılmasına izin ver */
 }
 
+/* Yatay ve büyük fotoğraflar için sınırlandırmalar */
+canvas, img {
+  max-width: 100%;  /* Kartın genişliğini aşmaması için */
+  max-height: 80vh; /* Kartın yüksekliğini aşmaması için */
+  object-fit: contain; /* Görüntüyü orantılı bir şekilde küçült */
+}
+
 h2 {
   margin-bottom: 20px;
   color: #0056b3;
@@ -112,5 +119,10 @@ input[type="number"] {
 
   .apply-btn {
     padding: 10px 0; /* Düğme boyutunu biraz küçültelim */
+  }
+
+  canvas, img {
+    max-width: 100%;
+    max-height: 70vh; /* Mobilde daha küçük bir sınırlama */
   }
 }

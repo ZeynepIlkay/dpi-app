@@ -6,10 +6,31 @@ function App() {
   const [dpi, setDpi] = useState(72);
   const [file, setFile] = useState(null);
   const [dragging, setDragging] = useState(false);
-  const fileInputRef = useRef(null); // Dosya inputu referansı oluşturuyoruz
+  const fileInputRef = useRef(null);
+  const canvasRef = useRef(null);
 
   const handleImageUpload = (event) => {
-    setFile(event.target.files[0]);
+    const file = event.target.files[0];
+    setFile(file);
+    const reader = new FileReader();
+
+    reader.onload = (e) => {
+      const img = new Image();
+      img.onload = () => {
+        const canvas = canvasRef.current;
+        const ctx = canvas.getContext("2d");
+
+        // Canvas boyutlarını ayarla
+        canvas.width = img.width;
+        canvas.height = img.height;
+
+        // Resmi canvas'a çiz
+        ctx.drawImage(img, 0, 0);
+      };
+      img.src = e.target.result;
+    };
+
+    reader.readAsDataURL(file);
   };
 
   const handleDpiChange = async () => {
@@ -49,36 +70,34 @@ function App() {
     setDragging(false);
     const fileDropped = e.dataTransfer.files[0];
     setFile(fileDropped);
+    handleImageUpload({ target: { files: [fileDropped] } });
   };
 
   const handleClick = () => {
-    fileInputRef.current.click(); // Tıklamada dosya seçme penceresini açıyoruz
+    fileInputRef.current.click();
   };
 
   return (
     <div className="app-container">
       <div className="card">
         <h2>DPI Ayarlayıcı</h2>
-        <div 
-          className={`drop-area ${dragging ? 'dragging' : ''}`}
+        <div
+          className={`drop-area ${dragging ? "dragging" : ""}`}
           onDragOver={handleDragOver}
           onDragLeave={handleDragLeave}
           onDrop={handleDrop}
-          onClick={handleClick} // Tıklamada dosya seçme penceresini aç
+          onClick={handleClick}
         >
-          {file ? (
-            <p>{file.name} yüklendi!</p>
-          ) : (
-            <p>Dosyayı buraya sürükleyin veya seçmek için tıklayın</p>
-          )}
-          <input 
-            type="file" 
-            accept="image/*" 
-            onChange={handleImageUpload} 
-            ref={fileInputRef} // input referansı
-            style={{ display: 'none' }} // Input'u gizli tutuyoruz
+          {file ? <p>{file.name} yüklendi!</p> : <p>Dosyayı buraya sürükleyin veya seçmek için tıklayın</p>}
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handleImageUpload}
+            ref={fileInputRef}
+            style={{ display: "none" }}
           />
         </div>
+        <canvas ref={canvasRef} style={{ display: file ? "block" : "none", marginTop: "10px", maxWidth: "100%" }} />
         <label htmlFor="dpi">DPI Değeri:</label>
         <input
           type="number"

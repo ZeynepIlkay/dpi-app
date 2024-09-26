@@ -1,0 +1,83 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f0f0;
+}
+
+.app-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.card {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 400px;
+  border: 2px solid #d7ef89;
+}
+
+h2 {
+  margin-bottom: 20px;
+  color: #0056b3;
+}
+
+.drop-area {
+  border: 2px dashed #ccc;
+  padding: 20px;
+  margin-bottom: 15px;
+  cursor: pointer;
+  transition: border-color 0.3s;
+}
+
+.drop-area.dragging {
+  border-color: #007bff;
+}
+
+.drop-area p {
+  margin: 0;
+  color: #666;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+  color: #0056b3;
+}
+
+input[type="number"] {
+  padding: 8px;
+  width: 100%;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.apply-btn {
+  background-color: #d7ef89;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.apply-btn:hover {
+  background-color: #0056b3;
+}
